@@ -31,29 +31,10 @@
   }
   .cover h1 em { font-style: italic; color: #e65926; }
   .cover .sub { color: #5c5c5c; font-size: 1.05rem; max-width: 540px; margin: .5rem auto 0; }
-  .cover-btns { display: flex; gap: 12px; margin-top: 1.75rem; flex-wrap: wrap; justify-content: center; }
-  .btn-dl {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 20px; border-radius: 8px; font-size: .85rem; font-weight: 500;
-    text-decoration: none; transition: all .15s; cursor: pointer;
-  }
-  .btn-dl svg { width: 15px; height: 15px; flex-shrink: 0; }
-  .btn-dl-primary {
-    background: #e65926; color: #fff; border: 1px solid #e65926;
-  }
-  .btn-dl-primary:hover { background: #cf4e20; border-color: #cf4e20; }
-  .btn-dl-secondary {
-    background: #fff; color: #1a1a1a; border: 1px solid #d5d5d5;
-  }
-  .btn-dl-secondary:hover { border-color: #e65926; color: #e65926; }
 
   /* ---- Layout ---- */
   .wrap { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
-  .section-title {
-    font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600;
-    text-align: center; padding: 2.5rem 2rem 0; color: #1a1a1a;
-  }
-  .steps { padding: 2.5rem 0 5rem; }
+  .steps { padding: 3rem 0 5rem; }
 
   /* ---- Steps ---- */
   .step { position: relative; padding-left: 52px; margin-bottom: 4rem; }
@@ -197,6 +178,28 @@
   .sg-item .det { font-size: .75rem; color: #5c5c5c; margin-top: 1px; }
 
   /* ---- Footer ---- */
+  /* ---- Download buttons ---- */
+  .cover-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 1.75rem; }
+  .btn-dl {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 8px; font-size: .88rem; font-weight: 500;
+    text-decoration: none; transition: all .15s;
+  }
+  .btn-dl-primary {
+    background: #e65926; color: #fff; border: 1px solid #e65926;
+  }
+  .btn-dl-primary:hover { background: #cf4d1f; border-color: #cf4d1f; }
+  .btn-dl-secondary {
+    background: #fff; color: #1a1a1a; border: 1px solid #e5e5e5;
+  }
+  .btn-dl-secondary:hover { border-color: #e65926; color: #e65926; }
+
+  /* ---- Section title ---- */
+  .section-title {
+    text-align: center; font-family: 'Playfair Display', serif;
+    font-size: 1.75rem; font-weight: 600; margin-bottom: 2.5rem;
+  }
+
   .foot {
     text-align: center; padding: 3rem 2rem; color: #999; font-size: .78rem;
     border-top: 1px solid #e5e5e5;
@@ -216,21 +219,21 @@
   <div class="cover-badge">Skill de Cowork</div>
   <h1><em>Project Sizing</em> — LGaaS</h1>
   <div class="sub">Pega tus notas de discovery y recibe un documento listo para presentar al cliente con TAM, pricing, segmentos y un sample real de Apollo.</div>
-  <div class="cover-btns">
-    <a class="btn-dl btn-dl-primary" href="topspin-deals-project-sizing.skill" download>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+  <div class="cover-actions">
+    <a href="topspin-deals-project-sizing.skill" download class="btn-dl btn-dl-primary">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Descargar Skill
     </a>
-    <a class="btn-dl btn-dl-secondary" href="TopSpin_Deals_Project_Sizing_Spec.docx" download>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    <a href="TopSpin_Deals_Project_Sizing_Spec.docx" download class="btn-dl btn-dl-secondary">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Descargar Doc
     </a>
   </div>
 </div>
 
 <div class="wrap">
-<h2 class="section-title">¿Cómo funciona?</h2>
 <div class="steps">
+  <h2 class="section-title">¿Cómo funciona?</h2>
 
   <!-- 1 -->
   <div class="step">
@@ -286,21 +289,8 @@
   <!-- 3 -->
   <div class="step">
     <div class="step-num">3</div>
-    <h2>Recibes el documento + resumen</h2>
-    <p>Un .docx con branding TopSpin listo para presentar, con un resumen ejecutivo en el chat.</p>
-    <div class="chat">
-      <div class="chat-bar"><div class="dot"></div> Cowork</div>
-      <div class="chat-body">
-        <div class="msg msg-ai">
-          He preparado el Project Sizing de <strong>Nexora</strong>. Resumen rapido:<br><br>
-          <strong>TAM:</strong> ~1.000 – 1.600 empresas target en ES y PT<br>
-          <strong>Pricing:</strong> 220€ – 330€ por Qualified Meeting (+ 500€/mes fijo)<br>
-          <strong>Segmentos:</strong> 3 propuestos — Manufacturing, Retail & F&B, Logistics<br>
-          <strong>Sample:</strong> 10 empresas reales + 10 DMs con nombre y LinkedIn<br>
-          <strong>ROI:</strong> 13x – 18x
-        </div>
-      </div>
-    </div>
+    <h2>Recibes el sizing + te pregunta el pricing</h2>
+    <p>Primero el documento interno con el analisis completo. Despues te pide las 3 decisiones de pricing para preparar la propuesta al cliente.</p>
 
     <div class="doc-preview">
       <div class="doc-bar">
@@ -308,7 +298,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="#5c5c5c" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
           Nexora_Project_Sizing_20260317.docx
         </div>
-        <span>Clic para abrir</span>
+        <span style="font-size:.75rem; background:#f4f2ec; padding:3px 8px; border-radius:4px;">Interno</span>
       </div>
       <div class="doc-body">
         <div class="doc-mock">
@@ -324,13 +314,24 @@
       </div>
     </div>
 
-    <div class="summary">
-      <h3>Lo que incluye el documento</h3>
-      <div class="sg">
-        <div class="sg-item"><div class="lab">TAM</div><div class="val">Bruto + Efectivo</div><div class="det">Rango por segmento con factor de relevancia</div></div>
-        <div class="sg-item"><div class="lab">Pricing</div><div class="val">€/QM fundamentado</div><div class="det">6 factores + benchmark + simulacion ROI</div></div>
-        <div class="sg-item"><div class="lab">Segmentos</div><div class="val">2 – 5 propuestos</div><div class="det">Con senales de compra accionables</div></div>
-        <div class="sg-item"><div class="lab">Sample</div><div class="val">10 + 10 reales</div><div class="det">Empresas y DMs verificados de Apollo</div></div>
+    <div class="chat" style="margin-top:16px">
+      <div class="chat-bar"><div class="dot"></div> Cowork</div>
+      <div class="chat-body">
+        <div class="msg msg-ai">
+          He preparado el Project Sizing de <strong>Nexora</strong>. Resumen rapido:<br><br>
+          <strong>TAM:</strong> ~1.000 – 1.600 empresas target en ES y PT<br>
+          <strong>Pricing:</strong> 220€ – 330€ por Qualified Meeting (+ 500€/mes fijo)<br>
+          <strong>Segmentos:</strong> 3 propuestos — Manufacturing, Retail & F&B, Logistics<br>
+          <strong>Sample:</strong> 10 empresas reales + 10 DMs con nombre y LinkedIn<br>
+          <strong>ROI:</strong> 13x – 18x
+        </div>
+        <div class="msg msg-ai">
+          Para preparar la <strong>propuesta de colaboracion</strong> que le enviaremos al cliente, necesito que me confirmes 3 puntos:<br><br>
+          1. <strong>Precio por QM:</strong> Mi recomendacion esta entre 220€ y 330€. ¿Con que precio quieres ir?<br>
+          2. <strong>Monthly Fee:</strong> El estandar es 500€/mes. ¿Lo mantenemos?<br>
+          3. <strong>Activation Fee:</strong> ¿Gratis o con coste?
+        </div>
+        <div class="msg msg-user">Vamos con 280€ por QM, 500€ de monthly y activation fee gratis porque Laura es inversor de un fondo que nos interesa</div>
       </div>
     </div>
   </div>
@@ -338,17 +339,52 @@
   <!-- 4 -->
   <div class="step">
     <div class="step-num">4</div>
-    <h2>Siguiente paso: arrancar el discovery</h2>
-    <p>Si el deal avanza, dile "arranca el discovery" y pasa automaticamente al siguiente skill del pipeline.</p>
+    <h2>Se genera la propuesta para el cliente</h2>
+    <p>Con tu decision de pricing, la skill genera automaticamente un segundo documento: la Propuesta de Colaboracion, lista para enviar al cliente.</p>
     <div class="chat">
       <div class="chat-bar"><div class="dot"></div> Cowork</div>
       <div class="chat-body">
-        <div class="msg msg-ai">¿Quieres que arranque el discovery para Nexora?<br>Tambien puedo enviarlo por Slack o subirlo a Drive.</div>
-        <div class="msg msg-user">arranca el discovery</div>
-        <div class="skill-pill"><div class="spin"></div> lgaas-discovery activada</div>
+        <div class="msg msg-ai">
+          Tienes los dos documentos listos:<br><br>
+          &#128202; <strong>Sizing</strong> (interno): Nexora_Project_Sizing.docx<br>
+          &#128196; <strong>Propuesta</strong> (para el cliente): Nexora_Propuesta_LGaaS.docx<br><br>
+          ¿Quieres que lo envie por Slack, email, o que ajuste algo?
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-preview" style="margin-top:16px">
+      <div class="doc-bar">
+        <div class="fname">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#5c5c5c" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+          Nexora_Propuesta_LGaaS_20260317.docx
+        </div>
+        <span style="font-size:.75rem; background:rgba(230,89,38,.08); color:#e65926; padding:3px 8px; border-radius:4px; font-weight:500;">Para el cliente</span>
+      </div>
+      <div class="doc-body">
+        <div class="doc-mock">
+          <div class="logo-text">&#9670; TopSpin</div>
+          <h3 style="font-size:1.4rem;">Propuesta de Colaboracion</h3>
+          <div class="doc-sub">Lead Generation as a Service</div>
+          <div class="doc-client">Nexora</div>
+          <div class="doc-sec"><strong>1. Tu mercado</strong><span>Cuantas empresas encajan con tu perfil de cliente</span></div>
+          <div class="doc-sec"><strong>2. A quien contactamos</strong><span>Segmentos, perfiles y senales de interes</span></div>
+          <div class="doc-sec"><strong>3. Pricing</strong><span>280€/QM + 500€/mes + Activation gratis</span></div>
+          <div class="doc-sec"><strong>4. Que resultado podeis esperar</strong><span>Simulacion economica: ventas generadas y ROI</span></div>
+          <div class="doc-sec"><strong>5. Proximos pasos</strong><span>Reunion de dudas → Activacion LGaaS</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <h3>Dos documentos, dos audiencias</h3>
+      <div class="sg">
+        <div class="sg-item"><div class="lab">Sizing (interno)</div><div class="val">Para ti</div><div class="det">Analisis completo con TAM, factores de pricing y sample de Apollo</div></div>
+        <div class="sg-item"><div class="lab">Propuesta (cliente)</div><div class="val">Para el cliente</div><div class="det">Propuesta comercial con precios fijos, simulacion de valor y ROI</div></div>
       </div>
     </div>
   </div>
+
 
 </div>
 </div>
