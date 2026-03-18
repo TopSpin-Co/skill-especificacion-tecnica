@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TopSpin — Project Sizing Skill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #fdfbf7; color: #1a1a1a; line-height: 1.6; }
+
+  /* ---- Cover ---- */
+  .cover {
+    min-height: 50vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 5rem 2rem 3rem;
+  }
+  .cover-badge {
+    display: inline-block; font-size: .7rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: .05em;
+    padding: 5px 14px; border-radius: 20px;
+    background: rgba(230,89,38,.08); color: #e65926;
+    border: 1px solid rgba(230,89,38,.15); margin-bottom: 1.5rem;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 600;
+    margin-bottom: .25rem;
+  }
+  .cover h1 em { font-style: italic; color: #e65926; }
+  .cover .sub { color: #5c5c5c; font-size: 1.05rem; max-width: 540px; margin: .5rem auto 0; }
+
+  /* ---- Layout ---- */
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+  .steps { padding: 3rem 0 5rem; }
+
+  /* ---- Steps ---- */
+  .step { position: relative; padding-left: 52px; margin-bottom: 4rem; }
+  .step:last-child { margin-bottom: 0; }
+  .step-num {
+    position: absolute; left: 0; top: 2px;
+    width: 32px; height: 32px; background: #e65926; color: #fff;
+    font-size: 14px; font-weight: 600; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step::before {
+    content: ''; position: absolute; left: 15px; top: 42px; bottom: -4rem;
+    width: 2px; background: rgba(230,89,38,.15);
+  }
+  .step:last-child::before { display: none; }
+  .step h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 600; margin-bottom: .35rem;
+  }
+  .step > p { color: #5c5c5c; font-size: .9rem; margin-bottom: 1.25rem; }
+
+  /* ---- Chat ---- */
+  .chat {
+    background: #fff; border-radius: 12px;
+    border: 1px solid #e5e5e5; overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,.05);
+  }
+  .chat-bar {
+    padding: 10px 16px; border-bottom: 1px solid #e5e5e5;
+    display: flex; align-items: center; gap: 8px;
+    font-size: .8rem; color: #5c5c5c;
+  }
+  .chat-bar .dot { width: 8px; height: 8px; background: #e65926; border-radius: 50%; }
+  .chat-body { padding: 20px 16px; display: flex; flex-direction: column; gap: 14px; }
+
+  .msg { max-width: 90%; padding: 12px 16px; border-radius: 12px; font-size: .88rem; line-height: 1.55; }
+  .msg-user {
+    align-self: flex-end; background: #e65926; color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+  .msg-user em { font-style: normal; opacity: .85; }
+  .msg-ai {
+    align-self: flex-start; background: #f4f2ec;
+    border: 1px solid #e5e5e5; color: #1a1a1a;
+    border-bottom-left-radius: 4px;
+  }
+  .msg-ai strong { color: #e65926; }
+
+  /* ---- Skill loader ---- */
+  .skill-pill {
+    align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 20px; font-size: .78rem; font-weight: 500;
+    background: rgba(230,89,38,.08); color: #e65926;
+    border: 1px solid rgba(230,89,38,.15);
+  }
+  .skill-pill .spin {
+    width: 14px; height: 14px; border: 2px solid rgba(230,89,38,.25);
+    border-top-color: #e65926; border-radius: 50%;
+    animation: sp .7s linear infinite;
+  }
+  @keyframes sp { to { transform: rotate(360deg); } }
+
+  /* ---- Todo widget ---- */
+  .todo {
+    background: #fff; border: 1px solid #e5e5e5; border-radius: 10px;
+    padding: 14px 16px; margin-top: 6px;
+  }
+  .todo h4 {
+    font-size: .65rem; text-transform: uppercase; letter-spacing: .08em;
+    color: #5c5c5c; margin-bottom: 8px;
+  }
+  .todo-i { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: .82rem; color: #5c5c5c; }
+  .todo-i .ck { width: 15px; height: 15px; border-radius: 50%; flex-shrink: 0; }
+  .todo-i.done .ck { background: #34a853; display: flex; align-items: center; justify-content: center; }
+  .todo-i.done .ck::after { content: '\2713'; color: #fff; font-size: 9px; font-weight: 700; }
+  .todo-i.on .ck { border: 2px solid #e65926; background: rgba(230,89,38,.1); animation: pulse 1.4s ease infinite; }
+  @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(230,89,38,.3)} 50%{box-shadow:0 0 0 4px rgba(230,89,38,.1)} }
+  .todo-i.on { color: #1a1a1a; font-weight: 500; }
+  .todo-i.off .ck { border: 2px solid #ddd; }
+
+  /* ---- Triggers ---- */
+  .triggers { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .trig {
+    padding: 6px 12px; border-radius: 8px; font-size: .8rem;
+    background: #fff; border: 1px solid #e5e5e5; color: #5c5c5c;
+    cursor: default; transition: all .15s;
+  }
+  .trig:hover { border-color: #e65926; color: #e65926; background: rgba(230,89,38,.04); }
+
+  /* ---- Doc preview ---- */
+  .doc-preview {
+    background: #fff; border-radius: 12px; border: 1px solid #e5e5e5;
+    overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.05); margin-top: 16px;
+  }
+  .doc-bar {
+    padding: 10px 16px; border-bottom: 1px solid #e5e5e5;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: .8rem; color: #5c5c5c;
+  }
+  .doc-bar .fname { display: flex; align-items: center; gap: 6px; color: #1a1a1a; font-weight: 500; }
+  .doc-bar .fname svg { width: 16px; height: 16px; }
+  .doc-body { padding: 2.5rem 2rem; text-align: center; }
+  .doc-mock { max-width: 380px; margin: 0 auto; text-align: left; }
+  .doc-mock .logo-text {
+    font-family: 'Playfair Display', serif; font-weight: 600;
+    color: #e65926; font-size: 1.1rem; text-align: center; margin-bottom: 1.75rem;
+  }
+  .doc-mock h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.75rem;
+    font-weight: 600; color: #e65926; text-align: center; margin-bottom: .15rem;
+  }
+  .doc-mock .doc-sub { text-align: center; color: #5c5c5c; font-size: .9rem; margin-bottom: 1.25rem; }
+  .doc-mock .doc-client {
+    text-align: center; font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem;
+  }
+  .doc-sec {
+    border-left: 3px solid #e65926; padding: 6px 12px;
+    margin-bottom: 10px; font-size: .82rem;
+  }
+  .doc-sec strong { color: #e65926; display: block; font-size: .85rem; margin-bottom: 1px; }
+  .doc-sec span { color: #5c5c5c; }
+
+  /* ---- Summary grid ---- */
+  .summary {
+    background: #fff; border: 1px solid #e5e5e5; border-radius: 12px;
+    padding: 1.75rem; margin-top: 1.25rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,.05);
+  }
+  .summary h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem;
+    font-weight: 600; margin-bottom: 1rem;
+  }
+  .sg { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .sg-item { background: #f4f2ec; border-radius: 10px; padding: 14px; }
+  .sg-item .lab {
+    font-size: .65rem; text-transform: uppercase; letter-spacing: .05em;
+    color: #e65926; font-weight: 600; margin-bottom: 2px;
+  }
+  .sg-item .val { font-size: 1.25rem; font-weight: 700; color: #1a1a1a; }
+  .sg-item .det { font-size: .75rem; color: #5c5c5c; margin-top: 1px; }
+
+  /* ---- Footer ---- */
+  .foot {
+    text-align: center; padding: 3rem 2rem; color: #999; font-size: .78rem;
+    border-top: 1px solid #e5e5e5;
+  }
+  .foot strong { color: #e65926; }
+
+  @media (max-width: 600px) {
+    .sg { grid-template-columns: 1fr; }
+    .cover h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Cover -->
+<div class="cover">
+  <div class="cover-badge">Skill de Cowork</div>
+  <h1><em>Project Sizing</em> — LGaaS</h1>
+  <div class="sub">Pega tus notas de discovery y recibe un documento listo para presentar al cliente con TAM, pricing, segmentos y un sample real de Apollo.</div>
+</div>
+
+<div class="wrap">
+<div class="steps">
+
+  <!-- 1 -->
+  <div class="step">
+    <div class="step-num">1</div>
+    <h2>Pega tus notas de la call</h2>
+    <p>Copia las notas directamente en el chat. No hace falta formato — texto libre, bullet points, lo que tengas de la discovery.</p>
+    <div class="chat">
+      <div class="chat-bar"><div class="dot"></div> Cowork</div>
+      <div class="chat-body">
+        <div class="msg msg-user">
+          Discovery Call — Nexora<br><br>
+          Laura me contacto por LinkedIn. Plataforma SaaS de procurement para empresas medianas. Web: nexora.io. Ticket medio 35k€ anuales. Target: manufacturing, retail, logistica, 200-2000 empleados en ES y PT. Quieren 6-8 meetings al mes...<br><br>
+          <em>prepara el sizing</em>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:14px; font-size:.8rem; color:#999;">Cualquiera de estas frases activa la skill:</p>
+    <div class="triggers">
+      <div class="trig">prepara el sizing</div>
+      <div class="trig">dimensionar proyecto</div>
+      <div class="trig">cuanto cobrariamos</div>
+      <div class="trig">pricing para Nexora</div>
+      <div class="trig">analiza estas notas</div>
+      <div class="trig">es viable este proyecto</div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="step">
+    <div class="step-num">2</div>
+    <h2>La skill trabaja sola</h2>
+    <p>Parsea las notas, investiga la web del cliente, busca en Apollo, calcula el pricing y genera el documento. Normalmente no necesita preguntarte nada.</p>
+    <div class="chat">
+      <div class="chat-bar"><div class="dot"></div> Cowork</div>
+      <div class="chat-body">
+        <div class="skill-pill"><div class="spin"></div> topspin-deals-project-sizing activada</div>
+        <div class="msg msg-ai">Tus notas estan muy completas — tengo los 10 datos clave sin gaps. No necesito preguntarte nada. Arranco el research web y las busquedas en Apollo.</div>
+        <div class="todo">
+          <h4>Progreso</h4>
+          <div class="todo-i done"><div class="ck"></div> Parsear notas de discovery</div>
+          <div class="todo-i done"><div class="ck"></div> Research web de Nexora</div>
+          <div class="todo-i done"><div class="ck"></div> Estimar TAM en Apollo</div>
+          <div class="todo-i done"><div class="ck"></div> Calcular pricing por QM</div>
+          <div class="todo-i done"><div class="ck"></div> Proponer segmentos de targeting</div>
+          <div class="todo-i on"><div class="ck"></div> Sample: 10 empresas + 10 DMs</div>
+          <div class="todo-i off"><div class="ck"></div> Generar documento .docx</div>
+          <div class="todo-i off"><div class="ck"></div> Validar y entregar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="step">
+    <div class="step-num">3</div>
+    <h2>Recibes el documento + resumen</h2>
+    <p>Un .docx con branding TopSpin listo para presentar, con un resumen ejecutivo en el chat.</p>
+    <div class="chat">
+      <div class="chat-bar"><div class="dot"></div> Cowork</div>
+      <div class="chat-body">
+        <div class="msg msg-ai">
+          He preparado el Project Sizing de <strong>Nexora</strong>. Resumen rapido:<br><br>
+          <strong>TAM:</strong> ~1.000 – 1.600 empresas target en ES y PT<br>
+          <strong>Pricing:</strong> 220€ – 330€ por Qualified Meeting (+ 500€/mes fijo)<br>
+          <strong>Segmentos:</strong> 3 propuestos — Manufacturing, Retail & F&B, Logistics<br>
+          <strong>Sample:</strong> 10 empresas reales + 10 DMs con nombre y LinkedIn<br>
+          <strong>ROI:</strong> 13x – 18x
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-preview">
+      <div class="doc-bar">
+        <div class="fname">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#5c5c5c" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+          Nexora_Project_Sizing_20260317.docx
+        </div>
+        <span>Clic para abrir</span>
+      </div>
+      <div class="doc-body">
+        <div class="doc-mock">
+          <div class="logo-text">&#9670; TopSpin</div>
+          <h3>Project Sizing</h3>
+          <div class="doc-sub">Lead Generation as a Service</div>
+          <div class="doc-client">Nexora</div>
+          <div class="doc-sec"><strong>1. Estimacion de TAM</strong><span>Tabla por segmento con Apollo bruto vs efectivo</span></div>
+          <div class="doc-sec"><strong>2. Propuesta de Pricing</strong><span>6 factores + rango de precio + simulacion mensual</span></div>
+          <div class="doc-sec"><strong>3. Segmentos de Targeting</strong><span>2-5 segmentos con senales de compra y prioridad</span></div>
+          <div class="doc-sec"><strong>4. Sample: 10 Empresas + 10 DMs</strong><span>Datos reales de Apollo con nombres completos y LinkedIn</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <h3>Lo que incluye el documento</h3>
+      <div class="sg">
+        <div class="sg-item"><div class="lab">TAM</div><div class="val">Bruto + Efectivo</div><div class="det">Rango por segmento con factor de relevancia</div></div>
+        <div class="sg-item"><div class="lab">Pricing</div><div class="val">€/QM fundamentado</div><div class="det">6 factores + benchmark + simulacion ROI</div></div>
+        <div class="sg-item"><div class="lab">Segmentos</div><div class="val">2 – 5 propuestos</div><div class="det">Con senales de compra accionables</div></div>
+        <div class="sg-item"><div class="lab">Sample</div><div class="val">10 + 10 reales</div><div class="det">Empresas y DMs verificados de Apollo</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="step">
+    <div class="step-num">4</div>
+    <h2>Siguiente paso: arrancar el discovery</h2>
+    <p>Si el deal avanza, dile "arranca el discovery" y pasa automaticamente al siguiente skill del pipeline.</p>
+    <div class="chat">
+      <div class="chat-bar"><div class="dot"></div> Cowork</div>
+      <div class="chat-body">
+        <div class="msg msg-ai">¿Quieres que arranque el discovery para Nexora?<br>Tambien puedo enviarlo por Slack o subirlo a Drive.</div>
+        <div class="msg msg-user">arranca el discovery</div>
+        <div class="skill-pill"><div class="spin"></div> lgaas-discovery activada</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="foot">
+  TopSpin Co &middot; Revenue Operations<br>
+  Pipeline: <strong>Deals Sizing</strong> &rarr; lgaas-discovery &rarr; lgaas-database-generator
+</div>
+
+</body>
+</html>
