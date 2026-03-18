@@ -31,6 +31,21 @@
   }
   .cover h1 em { font-style: italic; color: #e65926; }
   .cover .sub { color: #5c5c5c; font-size: 1.05rem; max-width: 540px; margin: .5rem auto 0; }
+  .cover-btns { display: flex; gap: 12px; margin-top: 1.75rem; flex-wrap: wrap; justify-content: center; }
+  .btn-dl {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 8px; font-size: .85rem; font-weight: 500;
+    text-decoration: none; transition: all .15s; cursor: pointer;
+  }
+  .btn-dl svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .btn-dl-primary {
+    background: #e65926; color: #fff; border: 1px solid #e65926;
+  }
+  .btn-dl-primary:hover { background: #cf4e20; border-color: #cf4e20; }
+  .btn-dl-secondary {
+    background: #fff; color: #1a1a1a; border: 1px solid #d5d5d5;
+  }
+  .btn-dl-secondary:hover { border-color: #e65926; color: #e65926; }
 
   /* ---- Layout ---- */
   .wrap { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
@@ -197,6 +212,16 @@
   <div class="cover-badge">Skill de Cowork</div>
   <h1><em>Project Sizing</em> — LGaaS</h1>
   <div class="sub">Pega tus notas de discovery y recibe un documento listo para presentar al cliente con TAM, pricing, segmentos y un sample real de Apollo.</div>
+  <div class="cover-btns">
+    <a class="btn-dl btn-dl-primary" href="topspin-deals-project-sizing.skill" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Descargar Skill
+    </a>
+    <a class="btn-dl btn-dl-secondary" href="TopSpin_Deals_Project_Sizing_Spec.docx" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Descargar Doc
+    </a>
+  </div>
 </div>
 
 <div class="wrap">
