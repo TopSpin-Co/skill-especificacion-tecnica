@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TopSpin — Project Sizing Skill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #fdfbf7; color: #1a1a1a; line-height: 1.6;
+  }
+  a { color: inherit; }
+
+  :root {
+    --orange: #e65926;
+    --orange-dark: #cf4d1f;
+    --orange-soft: rgba(230,89,38,.08);
+    --orange-line: rgba(230,89,38,.18);
+    --cream: #f4f2ec;
+    --line: #e5e5e5;
+    --ink: #1a1a1a;
+    --mute: #5c5c5c;
+    --soft: #999;
+  }
+
+  /* ---- Cover ---- */
+  .cover { padding: 4.5rem 2rem 2.5rem; text-align: center; }
+  .cover-inner { max-width: 820px; margin: 0 auto; }
+  .cover-badge {
+    display: inline-block; font-size: .7rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: .05em;
+    padding: 5px 14px; border-radius: 20px;
+    background: var(--orange-soft); color: var(--orange);
+    border: 1px solid var(--orange-line); margin-bottom: 1.25rem;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5.5vw, 3.5rem); font-weight: 600; line-height: 1.05;
+  }
+  .cover h1 em { font-style: italic; color: var(--orange); }
+  .cover .sub {
+    color: var(--mute); font-size: 1.05rem;
+    max-width: 580px; margin: .9rem auto 0;
+  }
+  .cover-actions {
+    display: flex; gap: 12px; justify-content: center;
+    flex-wrap: wrap; margin-top: 1.75rem;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px; border-radius: 8px;
+    font-size: .9rem; font-weight: 500; text-decoration: none;
+    transition: all .15s; cursor: pointer; border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--orange); color: #fff; border-color: var(--orange); }
+  .btn-primary:hover { background: var(--orange-dark); border-color: var(--orange-dark); }
+  .btn-secondary { background: #fff; color: var(--ink); border-color: var(--line); }
+  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* ---- Layout ---- */
+  .wide { max-width: 1240px; margin: 0 auto; padding: 0 2rem; }
+
+  /* ---- Section header ---- */
+  .sec-head { text-align: center; margin-bottom: 2.5rem; }
+  .sec-tag {
+    display: inline-block; font-size: .68rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .12em;
+    color: var(--orange); margin-bottom: .65rem;
+  }
+  .sec-head h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 600; line-height: 1.15;
+  }
+  .sec-head p {
+    color: var(--mute); margin: .7rem auto 0;
+    max-width: 580px; font-size: .98rem;
+  }
+
+  /* ---- Output preview (top) ---- */
+  .output-section {
+    padding: 2.5rem 0 4.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .output-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem;
+    align-items: start;
+  }
+
+  /* ---- Doc preview ---- */
+  .doc-preview {
+    background: #fff; border-radius: 12px; border: 1px solid var(--line);
+    overflow: hidden; box-shadow: 0 6px 24px rgba(0,0,0,.04);
+  }
+  .doc-bar {
+    padding: 10px 16px; border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: .78rem; color: var(--mute);
+  }
+  .doc-bar .fname { display: flex; align-items: center; gap: 6px; color: var(--ink); font-weight: 500; }
+  .doc-bar .fname svg { width: 16px; height: 16px; }
+  .doc-bar .audience {
+    font-size: .7rem; padding: 3px 8px; border-radius: 4px; font-weight: 500;
+  }
+  .doc-bar .audience.internal { background: var(--cream); color: var(--mute); }
+  .doc-bar .audience.client { background: var(--orange-soft); color: var(--orange); }
+  .doc-body { padding: 1.5rem; }
+  .doc-mock { max-width: 380px; margin: 0 auto; text-align: left; }
+  .doc-mock .logo-text {
+    font-family: 'Playfair Display', serif; font-weight: 600;
+    color: var(--orange); font-size: 1rem; text-align: center;
+    margin-bottom: 1.1rem;
+  }
+  .doc-mock h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.5rem;
+    font-weight: 600; color: var(--orange); text-align: center;
+    margin-bottom: .15rem;
+  }
+  .doc-mock .doc-sub {
+    text-align: center; color: var(--mute);
+    font-size: .85rem; margin-bottom: .9rem;
+  }
+  .doc-mock .doc-client {
+    text-align: center; font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; font-weight: 600; margin-bottom: 1.4rem;
+  }
+  .doc-sec {
+    border-left: 3px solid var(--orange); padding: 5px 12px;
+    margin-bottom: 8px; font-size: .8rem;
+  }
+  .doc-sec strong { color: var(--orange); display: block; font-size: .82rem; margin-bottom: 1px; }
+  .doc-sec span { color: var(--mute); font-size: .78rem; }
+
+  /* ---- Big numbered steps ---- */
+  .flow-section {
+    padding: 4.5rem 0 4rem;
+  }
+  .flow-step {
+    display: grid; grid-template-columns: 80px 1fr 1.2fr; gap: 2rem;
+    align-items: start; padding: 2.25rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .flow-step:first-of-type { border-top: none; padding-top: 0; }
+  .step-marker { text-align: center; }
+  .step-num {
+    width: 52px; height: 52px; background: var(--orange); color: #fff;
+    font-family: 'Playfair Display', serif; font-size: 1.4rem;
+    font-weight: 600; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto;
+  }
+  .step-copy h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.4rem;
+    font-weight: 600; margin-bottom: .35rem;
+  }
+  .step-copy p { color: var(--mute); font-size: .95rem; margin-bottom: .75rem; }
+  .interaction-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border-radius: 6px; font-size: .7rem;
+    font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+    background: var(--orange-soft); color: var(--orange);
+  }
+  .interaction-tag::before {
+    content: ''; width: 6px; height: 6px; background: var(--orange); border-radius: 50%;
+  }
+
+  /* ---- Chat ---- */
+  .chat {
+    background: #fff; border-radius: 12px;
+    border: 1px solid var(--line); overflow: hidden;
+    box-shadow: 0 6px 24px rgba(0,0,0,.04);
+  }
+  .chat-bar {
+    padding: 10px 16px; border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; gap: 8px;
+    font-size: .78rem; color: var(--mute);
+  }
+  .chat-bar .dot { width: 8px; height: 8px; background: var(--orange); border-radius: 50%; }
+  .chat-body { padding: 18px 16px; display: flex; flex-direction: column; gap: 14px; }
+
+  .msg {
+    max-width: 92%; padding: 12px 16px; border-radius: 12px;
+    font-size: .88rem; line-height: 1.55;
+  }
+  .msg-user {
+    align-self: flex-end; background: var(--orange); color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+  .msg-user em { font-style: normal; opacity: .85; }
+  .msg-ai {
+    align-self: flex-start; background: var(--cream);
+    border: 1px solid var(--line); color: var(--ink);
+    border-bottom-left-radius: 4px;
+  }
+  .msg-ai strong { color: var(--orange); }
+  .msg-ai .num-line {
+    display: flex; gap: 8px; align-items: baseline; padding: 3px 0;
+  }
+  .msg-ai .num-line .n {
+    font-weight: 700; color: var(--orange); flex-shrink: 0; min-width: 18px;
+  }
+
+  /* ---- Skill loader ---- */
+  .skill-pill {
+    align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 20px; font-size: .78rem; font-weight: 500;
+    background: var(--orange-soft); color: var(--orange);
+    border: 1px solid var(--orange-line);
+  }
+  .skill-pill .spin {
+    width: 14px; height: 14px; border: 2px solid rgba(230,89,38,.25);
+    border-top-color: var(--orange); border-radius: 50%;
+    animation: sp .7s linear infinite;
+  }
+  @keyframes sp { to { transform: rotate(360deg); } }
+
+  /* ---- Triggers ---- */
+  .triggers { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .trig {
+    padding: 5px 11px; border-radius: 6px; font-size: .78rem;
+    background: #fff; border: 1px solid var(--line); color: var(--mute);
+  }
+  .trig:hover { border-color: var(--orange); color: var(--orange); }
+
+  /* ---- Inputs/Tables shown in chat ---- */
+  .data-block {
+    background: #fff; border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 16px; font-size: .82rem;
+  }
+  .data-block h5 {
+    font-size: .68rem; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--orange); margin-bottom: 10px; font-weight: 600;
+  }
+  .data-row {
+    display: grid; grid-template-columns: 1fr auto;
+    padding: 5px 0; gap: 12px; border-bottom: 1px solid #f4f2ec;
+    align-items: baseline;
+  }
+  .data-row:last-child { border-bottom: none; }
+  .data-row .lab { color: var(--mute); }
+  .data-row .val { font-weight: 600; color: var(--ink); text-align: right; }
+  .data-row .src {
+    display: block; font-size: .7rem; color: var(--soft);
+    font-weight: 400; margin-top: 1px;
+  }
+
+  /* ---- Cost setup options ---- */
+  .cost-options {
+    background: #fff; border: 1px solid var(--line); border-radius: 10px;
+    overflow: hidden;
+  }
+  .cost-row {
+    display: grid; grid-template-columns: 80px 1fr auto; gap: 12px;
+    padding: 11px 14px; border-bottom: 1px solid #f4f2ec; font-size: .82rem;
+    align-items: center;
+  }
+  .cost-row:last-child { border-bottom: none; }
+  .cost-row.is-pick { background: var(--orange-soft); }
+  .cost-row .opt-label { font-weight: 700; color: var(--ink); }
+  .cost-row .opt-desc { color: var(--mute); font-size: .78rem; }
+  .cost-row .opt-total { font-weight: 600; color: var(--ink); white-space: nowrap; }
+  .cost-row.is-pick .opt-total { color: var(--orange); }
+
+  /* ---- File pill (doc entregado en chat) ---- */
+  .file-pill {
+    align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 14px; border-radius: 8px; font-size: .82rem; font-weight: 500;
+    background: #fff; border: 1px solid var(--line); color: var(--ink);
+  }
+  .file-pill svg { width: 15px; height: 15px; color: var(--orange); }
+  .file-pill .audience-mini {
+    font-size: .68rem; padding: 2px 7px; border-radius: 4px; font-weight: 500;
+    margin-left: 4px;
+  }
+  .file-pill .audience-mini.internal { background: var(--cream); color: var(--mute); }
+  .file-pill .audience-mini.client { background: var(--orange-soft); color: var(--orange); }
+
+  /* ---- Footer ---- */
+  .foot {
+    text-align: center; padding: 3rem 2rem;
+    color: var(--soft); font-size: .8rem;
+    border-top: 1px solid var(--line); background: #fff;
+  }
+  .foot strong { color: var(--orange); }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 980px) {
+    .output-grid { grid-template-columns: 1fr; }
+    .flow-step { grid-template-columns: 56px 1fr; gap: 1.25rem; }
+    .flow-step .step-output { grid-column: 1 / -1; margin-top: 1rem; }
+    .step-num { width: 44px; height: 44px; font-size: 1.2rem; }
+  }
+  @media (max-width: 600px) {
+    .cover h1 { font-size: 2rem; }
+    .wide { padding: 0 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Cover -->
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-badge">Skill de Cowork</div>
+    <h1><em>Project Sizing</em> — LGaaS</h1>
+    <div class="sub">Pegas las notas de discovery. Sale el sizing interno y la propuesta para el cliente.</div>
+    <div class="cover-actions">
+      <a href="topspin-deals-project-sizing.skill" download class="btn btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar Skill
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Output preview (TOP) -->
+<section class="output-section">
+  <div class="wide">
+    <div class="sec-head">
+      <span class="sec-tag">Lo que entrega</span>
+      <h2>Dos documentos por una call</h2>
+    </div>
+
+    <div class="output-grid">
+      <div class="doc-preview">
+        <div class="doc-bar">
+          <div class="fname">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#5c5c5c" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+            Klaró_Project_Sizing.docx
+          </div>
+          <span class="audience internal">Interno</span>
+        </div>
+        <div class="doc-body">
+          <div class="doc-mock">
+            <div class="logo-text">&#9670; TopSpin</div>
+            <h3>Project Sizing</h3>
+            <div class="doc-sub">Lead Generation as a Service</div>
+            <div class="doc-client">Klaró Compliance</div>
+            <div class="doc-sec"><strong>1. Estimación de TAM</strong><span>Empresas target por segmento</span></div>
+            <div class="doc-sec"><strong>2. Propuesta de Pricing</strong><span>Inputs + cálculos + 3 escenarios + veredicto</span></div>
+            <div class="doc-sec"><strong>3. Segmentos de Targeting</strong><span>Quién contactar y por qué</span></div>
+            <div class="doc-sec"><strong>4. Sample</strong><span>10 empresas + 10 DMs reales de Apollo</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-preview">
+        <div class="doc-bar">
+          <div class="fname">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#5c5c5c" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+            Klaró_Propuesta_LGaaS.docx
+          </div>
+          <span class="audience client">Para el cliente</span>
+        </div>
+        <div class="doc-body">
+          <div class="doc-mock">
+            <div class="logo-text">&#9670; TopSpin</div>
+            <h3 style="font-size:1.4rem;">Propuesta de Colaboración</h3>
+            <div class="doc-sub">Lead Generation as a Service</div>
+            <div class="doc-client">Klaró Compliance</div>
+            <div class="doc-sec"><strong>1. Tu mercado</strong><span>Empresas que encajan con tu ICP</span></div>
+            <div class="doc-sec"><strong>2. A quién contactamos y cómo</strong><span>Segmentos, perfiles y señales</span></div>
+            <div class="doc-sec"><strong>3. Pricing</strong><span>Activation gratis · 500€/mes · 1.500€/SQL</span></div>
+            <div class="doc-sec"><strong>4. Qué resultado podéis esperar</strong><span>Simulación económica y ROI</span></div>
+            <div class="doc-sec"><strong>5. Próximos pasos</strong><span>Reunión de cierre → Activación</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Flow steps -->
+<section class="flow-section">
+  <div class="wide">
+    <div class="sec-head">
+      <span class="sec-tag">Cómo lo construye</span>
+      <h2>El flujo paso a paso</h2>
+      <p>Trabaja sola hasta donde puede. Te pregunta solo en los puntos que necesitan tu criterio.</p>
+    </div>
+
+    <!-- 1 -->
+    <div class="flow-step">
+      <div class="step-marker"><div class="step-num">1</div></div>
+      <div class="step-copy">
+        <h3>Pega tus notas</h3>
+        <p>Texto libre, sin formato.</p>
+        <div class="triggers">
+          <div class="trig">prepara el sizing</div>
+          <div class="trig">cuanto cobrariamos</div>
+          <div class="trig">analiza estas notas</div>
+          <div class="trig">pricing para [cliente]</div>
+        </div>
+      </div>
+      <div class="step-output">
+        <div class="chat">
+          <div class="chat-bar"><div class="dot"></div> Cowork</div>
+          <div class="chat-body">
+            <div class="msg msg-user">
+              Discovery — Klaró Compliance. Diego (founder). Boutique compliance para
+              fintechs Series A-C. Proyectos 30-90k, medio 55k. Quieren 4-6 reuniones/mes.
+              60% repiten con un segundo proyecto...<br><br>
+              <em>prepara el sizing</em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="flow-step">
+      <div class="step-marker"><div class="step-num">2</div></div>
+      <div class="step-copy">
+        <h3>Investiga sola</h3>
+        <p>Web del cliente, TAM en Apollo, benchmarks sectoriales para los inputs que faltan.</p>
+      </div>
+      <div class="step-output">
+        <div class="chat">
+          <div class="chat-bar"><div class="dot"></div> Cowork</div>
+          <div class="chat-body">
+            <div class="skill-pill"><div class="spin"></div> topspin-deals-project-sizing activada</div>
+            <div class="msg msg-ai">
+              Notas ricas. Hago research de Klaró + Apollo + benchmarks de margen y conversión
+              para boutique compliance. Vuelvo en seguida con los inputs propuestos.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="flow-step">
+      <div class="step-marker"><div class="step-num">3</div></div>
+      <div class="step-copy">
+        <h3>Te confirma los inputs del cliente</h3>
+        <p>Los 4 datos que determinan cuánto valor le aportamos por SQL.</p>
+        <span class="interaction-tag">Te pregunta</span>
+      </div>
+      <div class="step-output">
+        <div class="chat">
+          <div class="chat-bar"><div class="dot"></div> Cowork</div>
+          <div class="chat-body">
+            <div class="msg msg-ai">
+              Estimación con la info que tengo — confirma o corrige:
+            </div>
+            <div class="data-block">
+              <h5>Inputs lado cliente</h5>
+              <div class="data-row">
+                <div class="lab">Ticket medio (T)<span class="src">Discovery: "medio 55k"</span></div>
+                <div class="val">55.000€<span class="src">por proyecto firmado</span></div>
+              </div>
+              <div class="data-row">
+                <div class="lab">Margen bruto (M)<span class="src">Punto medio del rango 35-45%</span></div>
+                <div class="val">40%</div>
+              </div>
+              <div class="data-row">
+                <div class="lab">Conversión SQL→cierre (C)<span class="src">50% reunión→opp × 35% opp→cierre</span></div>
+                <div class="val">17%</div>
+              </div>
+              <div class="data-row">
+                <div class="lab">LTV (proyectos/cliente)<span class="src">"60% repiten + 3-4 algunos"</span></div>
+                <div class="val">2x</div>
+              </div>
+            </div>
+            <div class="msg msg-user">Confirmados.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="flow-step">
+      <div class="step-marker"><div class="step-num">4</div></div>
+      <div class="step-copy">
+        <h3>Te pregunta el setup de costes</h3>
+        <p>Tres opciones según el tipo de proyecto, con su recomendación.</p>
+        <span class="interaction-tag">Te pregunta</span>
+      </div>
+      <div class="step-output">
+        <div class="chat">
+          <div class="chat-bar"><div class="dot"></div> Cowork</div>
+          <div class="chat-body">
+            <div class="msg msg-ai">
+              Target: General Counsel y CCO en fintechs Series A-C. No es trivial — recomiendo
+              <strong>Setup C</strong>.
+            </div>
+            <div class="cost-options">
+              <div class="cost-row">
+                <div class="opt-label">A · Lean</div>
+                <div class="opt-desc">SDR junior, stack básico</div>
+                <div class="opt-total">1.400€/mes</div>
+              </div>
+              <div class="cost-row">
+                <div class="opt-label">B · Estándar</div>
+                <div class="opt-desc">SDR mid, stack completo</div>
+                <div class="opt-total">2.000€/mes</div>
+              </div>
+              <div class="cost-row is-pick">
+                <div class="opt-label">C · Enterprise</div>
+                <div class="opt-desc">SDR senior + research, ICP complejo</div>
+                <div class="opt-total">2.850€/mes</div>
+              </div>
+              <div class="cost-row">
+                <div class="opt-label">D · Otro</div>
+                <div class="opt-desc">Personalizar</div>
+                <div class="opt-total">—</div>
+              </div>
+            </div>
+            <div class="msg msg-user">Setup C.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="flow-step">
+      <div class="step-marker"><div class="step-num">5</div></div>
+      <div class="step-copy">
+        <h3>Te entrega el sizing con recomendación</h3>
+        <p>Doc interno con los cálculos, los 3 escenarios de precio y un veredicto.</p>
+      </div>
+      <div class="step-output">
+        <div class="chat">
+          <div class="chat-bar"><div class="dot"></div> Cowork</div>
+          <div class="chat-body">
+            <div class="file-pill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+              Klaró_Project_Sizing.docx
+              <span class="audience-mini internal">Interno</span>
+            </div>
+            <div class="msg msg-ai">
+              <strong>Klaró</strong> · Valor/SQL 7.480€ · Coste/SQL 712€
+            </div>
+            <div class="data-block">
+              <div class="data-row">
+                <div class="lab">@50% · suelo<span class="src">Margen mínimo viable</span></div>
+                <div class="val">1.425€/SQL</div>
+              </div>
+              <div class="data-row">
+                <div class="lab">@66% · objetivo<span class="src">Margen sano para escalar</span></div>
+                <div class="val">2.096€/SQL</div>
+              </div>
+              <div class="data-row">
+                <div class="lab">@10%-valor · techo<span class="src">10% del valor cliente</span></div>
+                <div class="val">748€/SQL</div>
+              </div>
+            </div>
+            <div class="msg msg-ai">
+              <strong>Veredicto: Valor frágil.</strong> El @10%-valor cae bajo el @50%. Con C=17% y
+              Q=4 el cliente no soporta cómodamente nuestro coste. Recomendación: renegociar Q a
+              5-6, o anclar en <strong>1.425-1.700€/SQL</strong> si hay que firmar ya.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="flow-step">
+      <div class="step-marker"><div class="step-num">6</div></div>
+      <div class="step-copy">
+        <h3>Le dices qué precios usar</h3>
+        <p>Tres decisiones: precio por SQL, monthly fee y activation fee.</p>
+        <span class="interaction-tag">Te pregunta</span>
+      </div>
+      <div class="step-output">
+        <div class="chat">
+          <div class="chat-bar"><div class="dot"></div> Cowork</div>
+          <div class="chat-body">
+            <div class="msg msg-ai">
+              Para preparar la propuesta al cliente necesito 3 confirmaciones:
+              <div class="num-line"><div class="n">1.</div><div><strong>Precio por SQL</strong> — recomiendo 1.500€. ¿Vas con ese?</div></div>
+              <div class="num-line"><div class="n">2.</div><div><strong>Monthly Fee</strong> — estándar 500€/mes. ¿Lo mantenemos?</div></div>
+              <div class="num-line"><div class="n">3.</div><div><strong>Activation Fee</strong> — ¿gratis o con coste?</div></div>
+            </div>
+            <div class="msg msg-user">1.500€/SQL, 500€ monthly, activation gratis. Empujamos Q en 3 meses.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="flow-step">
+      <div class="step-marker"><div class="step-num">7</div></div>
+      <div class="step-copy">
+        <h3>Trabaja sola otra vez</h3>
+        <p>Genera la propuesta de colaboración con los precios fijos que has decidido.</p>
+      </div>
+      <div class="step-output">
+        <div class="chat">
+          <div class="chat-bar"><div class="dot"></div> Cowork</div>
+          <div class="chat-body">
+            <div class="skill-pill"><div class="spin"></div> generando propuesta de colaboración</div>
+            <div class="msg msg-ai">
+              Ok. Adapto el TAM y los segmentos a lenguaje cliente, fijo los precios y monto la
+              simulación de ROI. Sin Apollo ni cálculos internos en este doc.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="flow-step">
+      <div class="step-marker"><div class="step-num">8</div></div>
+      <div class="step-copy">
+        <h3>Te entrega la propuesta lista para enviar</h3>
+        <p>Documento comercial con precios fijos, ROI y próximos pasos.</p>
+      </div>
+      <div class="step-output">
+        <div class="chat">
+          <div class="chat-bar"><div class="dot"></div> Cowork</div>
+          <div class="chat-body">
+            <div class="file-pill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+              Klaró_Propuesta_LGaaS.docx
+              <span class="audience-mini client">Para el cliente</span>
+            </div>
+            <div class="msg msg-ai">
+              Tienes los dos documentos listos. ¿Te lo envío por Slack, lo subo a Drive o lo
+              ajusto antes?
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  TopSpin Co · Revenue Operations<br>
+  Pipeline: <strong>Deals Sizing</strong> → lgaas-discovery → lgaas-database-generator
+</footer>
+
+</body>
+</html>
